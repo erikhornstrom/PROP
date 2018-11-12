@@ -46,7 +46,7 @@ public class Tokenizer implements ITokenizer {
                         if (currentString.matches("[a-z]")) {
                             currentLexeme = new Lexeme(currentString, Token.IDENT);
                         } else if (currentString.matches("\\d")) {
-                            currentLexeme = new Lexeme(Double.parseDouble(currentString), Token.INT_LIT));
+                            currentLexeme = new Lexeme(Double.parseDouble(currentString), Token.INT_LIT);
                         } else {
                             throw new TokenizerException("TokenizerException");
                         }
@@ -59,4 +59,4 @@ public class Tokenizer implements ITokenizer {
     public void close() throws IOException {
         s.close();
     }
-} §
+}

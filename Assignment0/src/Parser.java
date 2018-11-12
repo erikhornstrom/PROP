@@ -21,9 +21,31 @@ public class Parser implements IParser {
      * Parses a program from file returning a parse tree (the root node of a parse tree).
      */
     @Override
-    public Node parse() throws IOException, TokenizerException, ParserException {
-        Node root = new Node(t);
-        return root;
+    public INode parse() throws IOException, TokenizerException, ParserException {
+        BlockNode rootNode = null;
+        if (t.current().value() == Token.LEFT_CURLY) {
+            rootNode = new BlockNode();
+            rootNode.addLexeme(t.current());
+            t.moveNext();
+        } else {
+            throw new ParserException("Parserexception: Expected LEFT CURLY");
+        }
+
+        rootNode.addChild(new StatementsNode());
+
+        if(t.current().value() == Token.RIGHT_CURLY) {
+            endNode = new BlockNode();
+            endNode.addLexeme(t.current());
+            t.moveNext();
+        } else {
+            throw new ParserException("Parserexception: Expected RIGHT_CURLY");
+        }
+
+
+
+
+
+        return rootNode;
     }
 
 
